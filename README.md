@@ -1,126 +1,72 @@
-# 🎵 EchoEncrypt - Audio Steganography Tool
+# EchoEncrypt v2.1
 
-A Python-based steganography tool that allows you to hide secret messages inside WAV audio files using LSB (Least Significant Bit) technique.
+Audio & Image Steganography Tool
 
-![Python](https://img.shields.io/badge/Python-3.x-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
+## Project Structure
 
-## 🔐 Features
-
-- **Hide Messages** - Embed secret text into WAV audio files
-- **Extract Messages** - Retrieve hidden messages from encoded audio
-- **Password Protection** - Encrypt your messages with AES-256 encryption (optional)
-- **User-Friendly** - Simple command-line interface with emoji feedback
-- **Error Handling** - Robust validation and helpful error messages
-
-## 📦 Installation
-
-### Prerequisites
-- Python 3.x
-
-```bash
-# No external dependencies required!
-# Uses only Python standard library
+```
+EchoEncrypt/
+├── EchoEncrypt.py      # Main dashboard - run this to start
+├── modules/
+│   ├── AudioEcho.py    # Audio steganography module
+│   └── ImageEcho.py    # Image steganography module
+├── assets/
+│   ├── hello.wav       # Test audio file
+│   └── Test.wav        # Test audio file
+├── .gitignore
+├── LICENSE
+└── README.md
 ```
 
-### Clone the Repository
-```bash
-git clone https://github.com/Dhruv-1608/EchoEncrypt.git
-cd EchoEncrypt
-```
-
-## 🚀 Usage
-
-### Hiding a Message (Encryption)
+## Installation
 
 ```bash
-# Without password (basic)
-python EchoEncrypt.py -f input.wav -m "Your secret message" -o output.wav
-
-# With password protection (encrypted)
-python EchoEncrypt.py -f input.wav -m "Your secret message" -o output.wav -p "your_password"
+pip install pillow
 ```
 
-**Arguments:**
-| Flag | Description | Required |
-|------|-------------|----------|
-| `-f` | Input WAV audio file | Yes |
-| `-m` | Secret message to hide | Yes |
-| `-o` | Output file name | Yes |
-| `-p, --password` | Password for encryption | No |
+## Usage
 
-### Extracting a Message (Decryption)
-
+### 1. Run Main Dashboard
 ```bash
-# Extract without password
-python ExEcho.py -f output.wav
-
-# Extract with password
-python ExEcho.py -f output.wav -p "your_password"
+python EchoEncrypt.py
 ```
 
-**Arguments:**
-| Flag | Description | Required |
-|------|-------------|----------|
-| `-f` | Encoded WAV audio file | Yes |
-| `-p, --password` | Password for decryption | No |
-
-## 💡 Examples
-
-### Example 1: Basic Usage
+### 2. Run Modules Standalone (Interactive Mode)
 ```bash
-# Hide a message
-python EchoEncrypt.py -f Test.wav -m "Hello World" -o hidden.wav
+# Audio Steganography - Interactive
+python modules/AudioEcho.py
 
-# Extract the message
-python ExEcho.py -f hidden.wav
-# Output: Your Secret Message is: Hello World
+# Image Steganography - Interactive
+python modules/ImageEcho.py
 ```
 
-### Example 2: With Password
+### 3. Main Menu Options
+- [1] Audio Steganography
+- [2] Image Steganography
+- [3] About
+- [0] Exit
+
+### Audio Commands (CLI Mode)
 ```bash
-# Hide a message with password
-python EchoEncrypt.py -f Test.wav -m "Secret Data" -o hidden.wav -p "MySecurePass123"
-
-# Extract using password
-python ExEcho.py -f hidden.wav -p "MySecurePass123"
-# Output: Your Secret Message is: Secret Data
+python modules/AudioEcho.py -f input.wav -m "message" -o output.wav
+python modules/AudioEcho.py -f input.wav -m "message" -o output.wav -p password
+python modules/AudioEcho.py -f output.wav
+python modules/AudioEcho.py -f output.wav -p password
 ```
 
-## 🔒 How It Works
+### Image Commands (CLI Mode)
+```bash
+python modules/ImageEcho.py -f input.png -m "message" -o output.png
+python modules/ImageEcho.py -f input.png -m "message" -o output.png -p password
+python modules/ImageEcho.py -f output.png
+python modules/ImageEcho.py -f output.png -p password
+```
 
-### LSB Steganography
-The tool uses the **Least Significant Bit** technique:
-1. Each audio sample contains bytes of data
-2. We modify the last bit of each byte to store our message
-3. The change is virtually undetectable to the human ear
-4. The end of the message is marked with a null byte (`00000000`)
+## Features
+- Hide messages in WAV audio files
+- Hide messages in PNG images
+- Password protection
+- Extract hidden messages
 
-### Password Encryption
-When a password is provided:
-1. The message is encrypted using **AES-256** (via Fernet)
-2. A key is derived from your password using **SHA256**
-3. Only someone with the correct password can decrypt the message
-
-## ⚠️ Limitations
-
-- Only supports **WAV** audio files
-- Message size is limited by audio file size
-- Encrypted messages are longer than plaintext
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📝 License
-
-This project is licensed under the MIT License.
-
-## 👤 Author
-
-**Dhruv-1608**
-- GitHub: [@Dhruv-1608](https://github.com/Dhruv-1608)
-
----
-
-⭐ Star this repo if you found it useful!
+## License
+MIT
